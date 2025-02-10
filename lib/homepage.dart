@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stacking_game/button.dart';
+import 'package:stacking_game/pixel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,20 +24,28 @@ class _HomePageState extends State<HomePage> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 10),
                 itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: Container(
-                        color: Colors.black,
-                      ),
-                    ),
-                  );
+                  return MyPixel(color: Colors.black);
                 }),
           ),
           Expanded(
             child: Container(
-              color: Colors.red,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MyButton(
+                    child: Text(
+                      "P L A Y",
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                  ),
+                  MyButton(
+                    child: Text(
+                      "S T O P",
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
