@@ -4,11 +4,13 @@ class MyButton extends StatelessWidget {
   //const MyButton({super.key});
 
   final child;
-  MyButton({this.child});
+  final function;
+  MyButton({this.child, this.function});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return GestureDetector(
+      onTap: function,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: ClipRRect(
