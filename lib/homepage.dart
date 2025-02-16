@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:stacking_game/button.dart';
 import 'package:stacking_game/pixel.dart';
@@ -12,12 +11,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int numberOfSquares = 160;
-  List<int> piece = [];
-  var direction = "left";
-  List<int> landed = [100000];
-  int level = 0;
+  int numberOfSquares = 160; // Número total de cuadrados en la cuadrícula
+  List<int> piece =
+      []; // Lista que contiene la posición actual de la pieza en movimiento
+  var direction = "left"; // Dirección inicial del movimiento de la pieza
+  List<int> landed = [
+    100000
+  ]; // Lista que contiene las posiciones de las piezas apiladas
+  int level = 0; // Nivel actual del juego
 
+  // Función para iniciar el juego
   void startGame() {
     piece = [
       numberOfSquares - 3 - level * 10,
@@ -48,6 +51,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Función para verificar si el jugador ha ganado
   bool checkWinner() {
     if (landed.last < 10) {
       return true;
@@ -56,6 +60,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // Función para mostrar un diálogo cuando el jugador gana
   void _showDialog() {
     showDialog(
         context: context,
@@ -66,6 +71,7 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  // Función para apilar la pieza actual
   void stack() {
     level++;
     setState(() {
@@ -91,6 +97,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Función para verificar y limpiar las piezas apiladas incorrectamente
   void checkStack() {
     setState(() {
       for (int i = 0; i < landed.length; i++) {
