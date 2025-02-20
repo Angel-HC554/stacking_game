@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   // Función para iniciar el juego
   void startGame() {
     piece = [
+      numberOfSquares - 4 - level * 10,
       numberOfSquares - 3 - level * 10,
       numberOfSquares - 2 - level * 10,
       numberOfSquares - 1 - level * 10
@@ -78,19 +79,25 @@ class _HomePageState extends State<HomePage> {
       for (int i = 0; i < piece.length; i++) {
         landed.add(piece[i]);
       }
-
       if (level < 4) {
         piece = [
+          numberOfSquares - 4 - level * 10,
           numberOfSquares - 3 - level * 10,
           numberOfSquares - 2 - level * 10,
           numberOfSquares - 1 - level * 10
         ];
       } else if (level >= 4 && level < 8) {
         piece = [
+          numberOfSquares - 3 - level * 10,
           numberOfSquares - 2 - level * 10,
           numberOfSquares - 1 - level * 10
         ];
-      } else if (level >= 8) {
+      } else if (level >= 8 && level < 12) {
+        piece = [
+          numberOfSquares - 2 - level * 10,
+          numberOfSquares - 1 - level * 10
+        ];
+      } else if (level >= 12) {
         piece = [numberOfSquares - 1 - level * 10];
       }
       checkStack();
@@ -100,12 +107,16 @@ class _HomePageState extends State<HomePage> {
   // Función para verificar y limpiar las piezas apiladas incorrectamente
   void checkStack() {
     setState(() {
+      // Iterar sobre las piezas apiladas
       for (int i = 0; i < landed.length; i++) {
+        // Si una pieza no tiene otra pieza directamente debajo de ella y está dentro de los límites
         if (!landed.contains(landed[i] + 10) &&
             (landed[i] + 10) < numberOfSquares - 1) {
+          // Eliminar la pieza
           landed.remove(landed[i]);
         }
       }
+      // Repetir la verificación para asegurar que todas las piezas incorrectas sean eliminadas
       for (int i = 0; i < landed.length; i++) {
         if (!landed.contains(landed[i] + 10) &&
             (landed[i] + 10) < numberOfSquares - 1) {
